@@ -24,9 +24,8 @@ I used the root mean squared error (RMSE) to evaluate the forecasting methods wh
 
 For illustrative purposes, I have solely referenced NP-15 throughout the file; otherwise, the README file would be 3x longer and provide no additional insight. 
 
-<p align="center"
-![CAISO Hubs](https://github.com/Morgan-Sell/caiso-price-forecast/blob/master/images/caiso_hubs.png)
-</p>
+
+<img align="center" src="https://github.com/Morgan-Sell/caiso-price-forecast/blob/master/images/caiso_hubs.png">
 
 ## Data and Processing
 
@@ -84,7 +83,7 @@ The SP-15 and ZP-26 forecasts produced similar conclusions. Below is the summary
 
 
 <p align="center">
-  <img width="300" height="250" src="https://github.com/Morgan-Sell/caiso-price-forecast/blob/master/images/rmse_summary_table.pn0">
+  <img width="300" height="250" src="https://github.com/Morgan-Sell/caiso-price-forecast/blob/master/images/rmse_summary_table.png">
 </p>
 
 
