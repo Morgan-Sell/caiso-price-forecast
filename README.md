@@ -10,6 +10,7 @@
 4) Model Evaluation and Selection
 5) Conclusion and Further Investigation
 6) Necessary Packages
+7) Sources
 
 ## Executive Summary
 Behind every lightbulb is a multi-billion-dollar industry based on the production, consumption, and trading of electricity. Hundreds of millions of dollars are exchanged on a 5-minute, 15-minute and hourly bases. The challenge is predicting what the price of electricity will be. Price volatility is high, arguably more unpredictable than the weather in the Amazon. 
@@ -37,16 +38,16 @@ Additionally, all the initial data was not an hourly basis. For example, the gen
 
 ## Exploratory Data Analysis
 
-Wholesale electricity markers are known for their unpredictability. This analysis was performed on the day-ahead market which is normally more “level-headed” than its untamed family members, the 5- and 15-sminute market. In the last year, prices in these markets have ranged from -$150 / MWh to $950 / MWh. <sup>(1)</sup>
+Wholesale electricity markers are known for their unpredictability. This analysis was performed on the day-ahead market which is normally more “level-headed” than its untamed family members, the 5- and 15-sminute market. In the last year, prices in these markets have ranged from -$150 / MWh to $950 / MWh.<sup>(1)</sup>
 
-From March 2019 to May 2020, the NP15, SP15, and ZP26 shared a similar price trend. The scatter plot below is NP-15 day-ahead maker hourly prices. The high prices in February 2019 were caused high natural gas prices at the trade hubs within the CAISO area. Prices at PG&E Citygate and SoCal Citygate increased from $5 to $10/MMBtu and $4 to $8/MMBtu, respectively. <sup>(1)</sup> As mentioned earlier natural gas is dominant source of energy California. It commands a higher percentage of the generation in the winter, e.g. February, when solar irradiation is limited.
+From March 2019 to May 2020, the NP15, SP15, and ZP26 shared a similar price trend. The scatter plot below is NP-15 day-ahead maker hourly prices. The high prices in February 2019 were caused high natural gas prices at the trade hubs within the CAISO area. Prices at PG&E Citygate and SoCal Citygate increased from $5 to $10/MMBtu and $4 to $8/MMBtu, respectively.<sup>(1)</sup> As mentioned earlier natural gas is dominant source of energy California. It commands a higher percentage of the generation in the winter, e.g. February, when solar irradiation is limited.
 
 
 ![NP-15 Hourly Price](https://github.com/Morgan-Sell/caiso-price-forecast/blob/master/images/np15_day_ahead_price.png)
 
 The following box plot demonstrates the distribution of NP-15 electricity prices by hour of the day. The graph shows two peaks – 7 to 8 am and 6 to pm. Consumption is greatest throughout the day; therefore, prices are expected to be higher when people are working, shopping, or attending school. How come prices drop in the middle of the day?
 
-The low mid-day prices are a result of California’s success in deploying solar energy. On average, solar now provides more than 10% of the electricity consumed by Californians. <sup>(1)</sup> Throughout the day, the state receives an abundance of energy; sometimes, too much energy is produced causing negative prices in the  real-time wholesale markets. And, unlike natural gas, a solar generator’s fuel – i.e. the sun – is free. Therefore, generators can supply energy at a lower marginal price.
+The low mid-day prices are a result of California’s success in deploying solar energy. On average, solar now provides more than 10% of the electricity consumed by Californians.<sup>(1)</sup> Throughout the day, the state receives an abundance of energy; sometimes, too much energy is produced causing negative prices in the  real-time wholesale markets. And, unlike natural gas, a solar generator’s fuel – i.e. the sun – is free. Therefore, generators can supply energy at a lower marginal price.
 
 ![NP-15 Price Distribution](https://github.com/Morgan-Sell/caiso-price-forecast/blob/master/images/np15_hourly_distribution.png)
 
@@ -96,3 +97,7 @@ Furthermore, as mentioned in the onset, I gathered various exogenous variables, 
 - matplotlib
 - tensorflow
 - seaborn
+
+## Sources
+
+(1) CAISO
