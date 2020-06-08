@@ -19,9 +19,9 @@ In this project, I assessed the accuracy of different time-series forecasting te
 
 To compare the modeling approaches, I performed a ten-day forecast of the California Independent System Operator (CAISO) hourly price in the day-ahead market at each of the main trading hubs, i.e. NP15, SP15, and ZP26. The image below shows how California electricity market is distributed among these three hubs/regions.
 
-I used the root mean squared error (RMSE) to evaluate the forecasting methods. It is used to score there forecast methods on the same denomination ($ / MWh) as the electricity price. The LSTM outperformed ARIMA for all three hubs. LSTM resulted in a RMSE that was 30% to 40% less than the RMSE achieved by the ARIMA model.
+I used the root mean squared error (RMSE) to evaluate the forecasting methods which allows the metric to be same denomination ($/MWh) as the price of electricity. The LSTM outperformed ARIMA for all three hubs. LSTM resulted in a RMSE that was 30% to 40% less than the RMSE achieved by the ARIMA model.
 
-For illustrative purposes, I have solely referenced NP-15 throughout the file; otherwise, the REAME file would be 3x longer and provide no additional insight. 
+For illustrative purposes, I have solely referenced NP-15 throughout the file; otherwise, the README file would be 3x longer and provide no additional insight. 
 
 
 ![CAISO Hubs](https://github.com/Morgan-Sell/caiso-price-forecast/blob/master/images/caiso_hubs.png)
@@ -30,27 +30,27 @@ For illustrative purposes, I have solely referenced NP-15 throughout the file; o
 
 The data is comprised of ~11,500 hours starting on March 1, 2019 and ending on May 31, 2020. The data specifically related to California – i.e. hourly price, generation, consumption, and net export – is sourced from the CAISO Open Access Same-time Information System (OASIS). I used the “pyiso” package, created by WattTime, to help with scraping and parsing some of the CAISO OASIS data.
 
-I also included the Henry Hub daily natural gas spot price, which I procured from Federal Reserve Economic Data (FRED). More than 50% of the electricity produced in California is derived from natural gas (1). Therefore, I included the fuel cost as an exogenous variable.
+I also included the Henry Hub daily natural gas spot price, which I procured from Federal Reserve Economic Data (FRED). More than 50% of the electricity produced in California is derived from natural gas. <sup>(1)</sup> Therefore, I included the fuel cost as an exogenous variable.
 
 Additionally, all the initial data was not an hourly basis. For example, the generation and load data were on 15-minute basis and the natural gas spot price was on a daily. Also, natural gas prices were not provided for weekend and national holidays. I used Friday or the prior day’s price prior for the days that the natural gas prices were omitted.
 
 
 ## Exploratory Data Analysis
 
-Wholesale electricity markers are known for their unpredictability. This analysis was performed on the day-ahead market which is normally more “level-headed” than its untamed family members, the 5- and 15-sminute market. In the last year, prices in these markets have ranged from -$ 150 / MWh to $950 / MWh. 
+Wholesale electricity markers are known for their unpredictability. This analysis was performed on the day-ahead market which is normally more “level-headed” than its untamed family members, the 5- and 15-sminute market. In the last year, prices in these markets have ranged from -$150 / MWh to $950 / MWh. <sup>(1)</sup>
 
-From March 2019 to May 2020, the NP15, SP15, and ZP26 shared a similar price trend. The scatter plot below is NP-15 day-ahead maker hourly prices. The high prices in February 2019 were caused high natural gas prices at the trade hubs within the CAISO area. Prices at PG&E Citygate and SoCal Citygate increased from $5 to $10/MMBtu and $4 to $8/MMBtu, respectively. As mentioned earlier natural gas is dominant source of energy California. It commands a higher percentage of the generation in the winter, e.g. February, when solar irradiation is limited.
+From March 2019 to May 2020, the NP15, SP15, and ZP26 shared a similar price trend. The scatter plot below is NP-15 day-ahead maker hourly prices. The high prices in February 2019 were caused high natural gas prices at the trade hubs within the CAISO area. Prices at PG&E Citygate and SoCal Citygate increased from $5 to $10/MMBtu and $4 to $8/MMBtu, respectively. <sup>(1)</sup> As mentioned earlier natural gas is dominant source of energy California. It commands a higher percentage of the generation in the winter, e.g. February, when solar irradiation is limited.
 
 
 ![NP-15 Hourly Price](https://github.com/Morgan-Sell/caiso-price-forecast/blob/master/images/np15_day_ahead_price.png)
 
 The following box plot demonstrates the distribution of NP-15 electricity prices by hour of the day. The graph shows two peaks – 7 to 8 am and 6 to pm. Consumption is greatest throughout the day; therefore, prices are expected to be higher when people are working, shopping, or attending school. How come prices drop in the middle of the day?
 
-The low mid-day prices are a result of California’s success in deploying solar energy. On average, solar now provides more than 10% of the electricity consumed by Californians. Throughout the day, the state receives an abundance of energy; sometimes, too much energy is produced causing negative prices in the  real-time wholesale markets. And, unlike natural gas, a solar generator’s fuel – i.e. the sun – is free. Therefore, generators can supply energy at a lower marginal price.
+The low mid-day prices are a result of California’s success in deploying solar energy. On average, solar now provides more than 10% of the electricity consumed by Californians. <sup>(1)</sup> Throughout the day, the state receives an abundance of energy; sometimes, too much energy is produced causing negative prices in the  real-time wholesale markets. And, unlike natural gas, a solar generator’s fuel – i.e. the sun – is free. Therefore, generators can supply energy at a lower marginal price.
 
 ![NP-15 Price Distribution](https://github.com/Morgan-Sell/caiso-price-forecast/blob/master/images/np15_hourly_distribution.png)
 
-To further evaluate, California’s advancement of renewable energy, the graph below shows the percentage of energy generated from renewable resources, i.e. solar and wind. The chart shows the seasonality, i.e. higher percentage of the generation during the summer due to longer days and less rain. Also, the data shows that starting in mid-March 2020, which coincides with policies being implemented to contain COVID-19, the state is producing a greater percentage of its energy from renewable resources in its history. 
+To further evaluate, California’s advancement of renewable energy, the graph below shows the percentage of energy generated from renewable resources, i.e. solar and wind. The chart shows the seasonality, i.e. higher percentage of the generation during the summer due to longer days and less rain. Also, the data demonstrates that starting in mid-March 2020, which coincides with policies being implemented to contain COVID-19, the state is producing a greater percentage of its energy from renewable resources in its history. 
 
 Further research is required to determine the cause. One driver to this increase is that less energy being produced, i.e. lower denominator. If true, it could support the argument that the marginal cost to generate energy from wind and solar is less than natural gas in the state of California.
 
