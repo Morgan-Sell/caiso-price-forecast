@@ -24,8 +24,9 @@ I used the root mean squared error (RMSE) to evaluate the forecasting methods wh
 
 For illustrative purposes, I have solely referenced NP-15 throughout the file; otherwise, the README file would be 3x longer and provide no additional insight. 
 
-
+<p align="center"
 ![CAISO Hubs](https://github.com/Morgan-Sell/caiso-price-forecast/blob/master/images/caiso_hubs.png)
+</p>
 
 ## Data and Processing
 
@@ -80,6 +81,12 @@ On the other hand, the LSTM model lives up to its name. The LSTM model demonstra
 ![NP-15 10-day Fcst](https://github.com/Morgan-Sell/caiso-price-forecast/blob/master/images/np15_10_day_fcst.png)
 
 The SP-15 and ZP-26 forecasts produced similar conclusions. Below is the summary of the RMSE for all three trading hubs and all three models.
+
+
+<p align="center">
+  <img width="300" height="250" src="https://github.com/Morgan-Sell/caiso-price-forecast/blob/master/images/rmse_summary_table.pn0">
+</p>
+
 
 ![RMSE Summary](https://github.com/Morgan-Sell/caiso-price-forecast/blob/master/images/rmse_summary_table.png)
 
