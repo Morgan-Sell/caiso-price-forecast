@@ -90,7 +90,7 @@ The SP-15 and ZP-26 forecasts produced similar conclusions. Below is the summary
 
 
 <p align="center">
-  <img src="https://github.com/Morgan-Sell/caiso-price-forecast/blob/master/images/rmse_summary_table.png">
+  <img heigh=200, width=200 src="https://github.com/Morgan-Sell/caiso-price-forecast/blob/master/images/rmse_summary_table.png">
 </p>
 
 
