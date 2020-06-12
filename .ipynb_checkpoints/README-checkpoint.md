@@ -13,15 +13,15 @@
 7) Sources
 
 ## Executive Summary
-Behind every lightbulb is a multi-billion-dollar industry based on the production, consumption, and trading of electricity. Hundreds of millions of dollars are exchanged on a 5-minute, 15-minute and hourly bases. The challenge is predicting what the price of electricity will be. Price volatility is high, arguably more unpredictable than the weather in the Amazon. 
+Behind every lightbulb is a multi-billion-dollar industry based on the production, consumption, and trading of electricity. Hundreds of millions of dollars are exchanged on 5-minute, 15-minute and hourly bases. A great challenge is predicting the price of electricity. Volatility is high, arguably more unpredictable than the weather in the Amazon. 
 
-Energy traders, procurers and power producer are constantly looking for an edge in how to enhance their accuracy in predicting wholesale electricity prices. In this project, I assessed the accuracy of different time-series forecasting techniques, i.e. historic average, ARIMA, and Long Short-Term Memory (LSTM).
+Energy traders, procurers, and power producers are constantly looking for an edge in how to enhance their forecasting accuracies.  In this project, I assessed the performance of different time-series forecasting techniques, i.e. historic average, autoegressive integrated moving average (ARIMA), and long short-term memory (LSTM).
 
-To compare the modeling approaches, I performed a ten-day hourly forecast of the California Independent System Operator (CAISO) wholesale electricity price in the day-ahead market at each of the main trading hubs, i.e. NP15, SP15, and ZP26. The image below shows how California electricity market is distributed among these three hubs/regions.
+To compare the modeling approaches, I performed ten-day hourly forecasts of the California Independent System Operator (CAISO) wholesale electricity price in the day-ahead market for each of the main trading hubs, i.e. NP15, SP15, and ZP26. The image below shows how the California electricity market is distributed among these three hubs/regions.
 
 I used the root mean squared error (RMSE) to evaluate the forecasting methods which allows the metric to be same denomination ($/MWh) as the price of electricity. The LSTM outperformed ARIMA for all three hubs. LSTM resulted in a RMSE that was 40% to 50% less than the RMSE achieved by the ARIMA model.
 
-For illustrative purposes, I have solely referenced NP-15 throughout the file; otherwise, the README file would be 3x longer and provide no additional insight. 
+To uphold the "TL;DR" doctrine, I have solely referenced NP-15 (NorCal) throughout the file.
 
 <p align="center">
   <img src="https://github.com/Morgan-Sell/caiso-price-forecast/blob/master/images/caiso_hubs.png">
@@ -31,23 +31,23 @@ For illustrative purposes, I have solely referenced NP-15 throughout the file; o
 
 The data is comprised of ~11,500 hours starting on March 1, 2019 and ending on May 31, 2020. The data specifically related to California – i.e. hourly price, generation, consumption, and net export – is sourced from the CAISO Open Access Same-time Information System (OASIS). I used the “pyiso” package, created by WattTime, to help with scraping and parsing some of the CAISO OASIS data.
 
-I also included the Henry Hub daily natural gas spot price, which I procured from Federal Reserve Economic Data (FRED). On average, more than 50% of the electricity produced in California is derived from natural gas. <sup>(1)</sup> Therefore, I included the fuel cost as an exogenous variable. The data demonstrates how the CAISO's dependency on natural gass impacts the price.
+I also included the Henry Hub daily natural gas spot price, which I procured from Federal Reserve Economic Data (FRED). On average, more than 50% of the electricity produced in California is derived from natural gas. <sup>(1)</sup> Therefore, I included the fuel cost as an exogenous variable. The data demonstrated how the CAISO's dependency on natural gass impacts the price.
 
-Additionally, all the initial data was not an hourly basis. For example, the generation and load data were on 15-minute basis and the natural gas spot price was on a daily. Also, natural gas prices were not provided for weekend and national holidays. I used Friday or the prior day’s price prior for the days that the natural gas prices were omitted.
+Additionally, all the initial data was not denominated in hours. For example, the generation and load data were generated on 15-minute bases and the natural gas spot price was on a daily. Also, natural gas prices were not provided for weekend and national holidays. I used Friday or the prior day’s price prior for the days that the natural gas prices were omitted.
 
 
 ## Exploratory Data Analysis
 
-Wholesale electricity markerts are known for their unpredictability. This analysis was performed on the day-ahead market which is normally more “level-headed” than its untamed family members, the 5- and 15-minute markets. In the last year, prices in these markets have ranged from -$150 / MWh to $950 / MWh.<sup>(1)</sup>
+Wholesale electricity markerts are known for their unpredictability. This analysis was performed on the day-ahead market which is normally more “level-headed” than its untamed family members, the 5- and 15-minute markets. In the last year, prices in real-time markets have ranged from -$150 / MWh to $950 / MWh.<sup>(1)</sup>
 
-From March 2019 to May 2020, the NP15, SP15, and ZP26 shared a similar price trend. The scatter plot below shows the NP-15 (NorCal) day-ahead hourly prices. The high prices in February 2019 were caused high natural gas prices at the trade hubs within the CAISO area. Prices at PG&E Citygate and SoCal Citygate increased from $5 to $10/MMBtu and $4 to $8/MMBtu, respectively.<sup>(1)</sup> As mentioned earlier natural gas is dominant source of energy California. It commands a higher percentage of the generation in the winter, e.g. February, when solar irradiation is limited.
+From March 2019 to May 2020, the NP15, SP15, and ZP26 shared a similar price trend. The scatter plot below shows the NP-15 (NorCal) day-ahead hourly prices. The high prices in February 2019 were caused high natural gas prices at the trade hubs within the CAISO area. Prices at PG&E Citygate and SoCal Citygate increased from $5 to $10/MMBtu and $4 to $8/MMBtu, respectively.<sup>(1)</sup> As mentioned earlier natural gas is the dominant source of energy California. It commands a higher percentage of the generation in the winter, e.g. February, when solar irradiation is limited.
 
 
 ![NP-15 Hourly Price](https://github.com/Morgan-Sell/caiso-price-forecast/blob/master/images/np15_day_ahead_price.png)
 
-The following box plot demonstrates the distribution of NP-15 (NorCal) electricity prices by hour of the day. For those who do not work in the energy sector, you may be questioning why there is a mid-day dip. We're not Spain that takes mid-day siestas. And, no, it is not common practice to have mid-day group meditation sessions with our gurus. Like our markets, consumption is greatest throughout the day.
+The following box plot demonstrates the distribution of NP-15 (NorCal) electricity prices by hour of the day. For those who do not work in the energy sector, you may be questioning why there is a mid-day dip. California is not Spain where mid-day siestas are pastime. And, no, it is not common practice to have mid-day group meditation sessions with gurus. Like other markets, consumption is greatest throughout the day in CAISO.
 
-However, California has been successful success in deploying solar energy. On average, solar now provides more than 10% of the electricity consumed by Californians.<sup>(1)</sup> Throughout the day, the state receives an abundance of energy; sometimes, too much energy is produced causing negative prices in the  real-time wholesale markets. And, unlike natural gas, a solar generator’s fuel – i.e. the sun – is free. Therefore, generators can supply energy at a lower marginal price. Since the
+However, California has been successful in deploying solar energy. On average, solar now provides more than 10% of the electricity consumed by Californians.<sup>(1)</sup> Throughout the day, the state receives an abundance of energy; sometimes, an excesssive ammount causing negative prices in the  real-time wholesale markets. And, unlike natural gas, a solar generator’s fuel – i.e. the sun – is free. Therefore, generators can supply energy at a lower marginal price. 
 
 ![NP-15 Price Distribution](https://github.com/Morgan-Sell/caiso-price-forecast/blob/master/images/np15_hourly_distribution.png)
 
@@ -82,7 +82,7 @@ On the other hand, the LSTM model lives up to its name. The LSTM model demonstra
 
 To optimize LSTM performance, I performed various iterations of LSTM. I have two key takeaways:
 
-1) In addition to computational efficiency, the RSME decreased when I applied `MinMaxScaler()` the data. (When doing so, remember to apply `inv_transform()` to reverse the scaling prior to assessing the prediction results.)
+1) In addition to enhancing computational efficiency, applying `MinMaxScaler()` significantly decreased the RMSE. (When doing so, remember to apply `inv_transform()` to reverse the scaling prior to assessing the prediction results.)
 
 2) Do not overlook simple models. I developed LSTM with various layers that included dropout rates to avoid overfitting. In the end, a LSTM with one hidden layer comprised of 32 nodes produced the most accurate results.
 
@@ -96,7 +96,7 @@ The SP-15 and ZP-26 forecasts produced similar conclusions. Below is the summary
 
 ## Conclusion and Further Exploration
 
-In short, recurrent neural networks, specifically LSTM, demonstrated its value in forecasting. The ability to retain knowledge of long-term dependencies byusing gates to retain/forget information that is carried along the network's "conveyor belt" is valuable when applied to time series. 
+In short, recurrent neural networks, specifically LSTM, demonstrated its value in forecasting. The ability to retain knowledge of long-term dependencies by vausing gates to retain/forget information that is carried along the network's "conveyor belt" is asset when applied to time series. 
 
 Overtime, I will add mutltivariate forecasting strategies to this repo to analyze depedencies among electricity supply/demand, fue resources, price, and other market dynamics.
 
