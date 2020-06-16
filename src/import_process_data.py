@@ -302,7 +302,7 @@ def save_caiso_df_to_csv(dataset, file_name):
     dataset.to_csv(path_csv_name)
     
 def import_caiso_dataset(version_name):
-    path_csv_name = 'data/' + version_name + '.csv'
+    path_csv_name = '../data/' + version_name + '.csv'
     return pd.read_csv(path_csv_name)
 
 if __name__ == '__main__':

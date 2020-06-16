@@ -66,7 +66,8 @@ def calc_stat_summary_for_all_hubs(all_lmp, hub_names):
     
     for curve, hub in zip(all_lmp, hub_names):
         calc_stats(curve, hub)
-
+    
+    plt.show();
 
 def plot_shared_yscales(axs, x, ys, titles, hub_name):
     ymiddles =  [ (y.max()+y.min())/2 for y in ys ]
@@ -113,3 +114,16 @@ def plot_lmp_curve_autocorrelation(arr_curves, hub_names, acf_lag=48):
     for i, name, diff in enumerate(diff_dict.items()):
         _ = sm.graphics.tsa.plot_acf(diff, lags=acf_lag, ax=axs[i])
         axs[i].set_title(f"Autocorrelation - {name}")
+
+
+if __name__ == '__main__':
+    
+    
+    np15_lmp = caiso['$_MWH_np15']
+    sp15_lmp = caiso['$_MWH_sp15']
+    zp26_lmp = caiso['$_MWH_zp26']
+    all_lmp = [np15_lmp, sp15_lmp, zp26_lmp]
+    hub_names = ['NP15', 'SP15', 'ZP26']
+    
+    caiso = import_process_data('caiso_master')
+    

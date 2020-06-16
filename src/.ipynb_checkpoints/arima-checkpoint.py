@@ -119,3 +119,11 @@ def plot_lmp_curve_autocorrelation(arr_curves, hub_names, acf_lag=48):
 if __name__ == '__main__':
     
     
+    np15_lmp = caiso['$_MWH_np15']
+    sp15_lmp = caiso['$_MWH_sp15']
+    zp26_lmp = caiso['$_MWH_zp26']
+    all_lmp = [np15_lmp, sp15_lmp, zp26_lmp]
+    hub_names = ['NP15', 'SP15', 'ZP26']
+    
+    caiso = import_process_data('caiso_master')
+    
