@@ -66,7 +66,8 @@ def calc_stat_summary_for_all_hubs(all_lmp, hub_names):
     
     for curve, hub in zip(all_lmp, hub_names):
         calc_stats(curve, hub)
-
+    
+    plt.show();
 
 def plot_shared_yscales(axs, x, ys, titles, hub_name):
     ymiddles =  [ (y.max()+y.min())/2 for y in ys ]
@@ -75,9 +76,10 @@ def plot_shared_yscales(axs, x, ys, titles, hub_name):
         ax.plot(x, y)
         ax.set_title(f"{title} - {hub_name}")
         ax.set_ylim((ymiddle-yrange, ymiddle+yrange))
+    plt.show();
 
 
-def plot_seasonal_decomposition(lmp_curve, period=1, hub_name):
+def plot_seasonal_decomposition(lmp_curve, hub_name, period=1):
     '''
     Deconstructs and plots the price curve into trend, seasonal and residual components.
     
@@ -91,7 +93,8 @@ def plot_seasonal_decomposition(lmp_curve, period=1, hub_name):
                         [lmp_curve, tsr_decomp.trend, tsr_decomp.seasonal, tsr_decomp.resid],
                         ["Raw Series", "Trend Component $T_t$", "Seasonal Component $S_t$", "Residual Component $R_t$"],
                         hub_name)
-    plt.tight_layout();
+    plt.tight_layout()
+    plt.show();
 
 def compute_autocorrelation(series, lag=1):
     truncated = series[lag:]
@@ -111,3 +114,8 @@ def plot_lmp_curve_autocorrelation(arr_curves, hub_names, acf_lag=48):
     for i, name, diff in enumerate(diff_dict.items()):
         _ = sm.graphics.tsa.plot_acf(diff, lags=acf_lag, ax=axs[i])
         axs[i].set_title(f"Autocorrelation - {name}")
+
+
+if __name__ == '__main__':
+    
+    

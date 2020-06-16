@@ -75,9 +75,10 @@ def plot_shared_yscales(axs, x, ys, titles, hub_name):
         ax.plot(x, y)
         ax.set_title(f"{title} - {hub_name}")
         ax.set_ylim((ymiddle-yrange, ymiddle+yrange))
+    plt.show();
 
 
-def plot_seasonal_decomposition(lmp_curve, period=1, hub_name):
+def plot_seasonal_decomposition(lmp_curve, hub_name, period=1):
     '''
     Deconstructs and plots the price curve into trend, seasonal and residual components.
     
@@ -91,7 +92,8 @@ def plot_seasonal_decomposition(lmp_curve, period=1, hub_name):
                         [lmp_curve, tsr_decomp.trend, tsr_decomp.seasonal, tsr_decomp.resid],
                         ["Raw Series", "Trend Component $T_t$", "Seasonal Component $S_t$", "Residual Component $R_t$"],
                         hub_name)
-    plt.tight_layout();
+    plt.tight_layout()
+    plt.show();
 
 def compute_autocorrelation(series, lag=1):
     truncated = series[lag:]
