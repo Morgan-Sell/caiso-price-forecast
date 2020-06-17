@@ -20,22 +20,22 @@ def create_price_curves():
 
     """
     # Import monthly csv files from CAISO website.
-    lmp_feb19 = pd.read_csv('data/caiso_lmp_nodes/20190201_20190301_PRC_LMP_DAM_20200603_09_30_31_v1.csv')
-    lmp_mar19 = pd.read_csv('data/caiso_lmp_nodes/20190301_20190401_PRC_LMP_DAM_20200603_09_21_36_v1.csv')
-    lmp_apr19 = pd.read_csv('data/caiso_lmp_nodes/20190401_20190501_PRC_LMP_DAM_20200602_22_44_57_v1.csv')
-    lmp_may19 = pd.read_csv('data/caiso_lmp_nodes/20190501_20190601_PRC_LMP_DAM_20200602_22_54_16_v1.csv')
-    lmp_jun19 = pd.read_csv('data/caiso_lmp_nodes/20190601_20190701_PRC_LMP_DAM_20200602_23_04_24_v1.csv')
-    lmp_jul19 = pd.read_csv('data/caiso_lmp_nodes/20190701_20190801_PRC_LMP_DAM_20200602_23_20_18_v1.csv')
-    lmp_aug19 = pd.read_csv('data/caiso_lmp_nodes/20190801_20190901_PRC_LMP_DAM_20200602_23_29_55_v1.csv')
-    lmp_sep19 = pd.read_csv('data/caiso_lmp_nodes/20190901_20191001_PRC_LMP_DAM_20200602_23_46_12_v1.csv')
-    lmp_oct19 = pd.read_csv('data/caiso_lmp_nodes/20191001_20191101_PRC_LMP_DAM_20200603_00_13_44_v1.csv')
-    lmp_nov19 = pd.read_csv('data/caiso_lmp_nodes/20191101_20191201_PRC_LMP_DAM_20200603_00_24_23_v1.csv')
-    lmp_dec19 = pd.read_csv('data/caiso_lmp_nodes/20191201_20200101_PRC_LMP_DAM_20200603_00_33_09_v1.csv')
-    lmp_jan20 = pd.read_csv('data/caiso_lmp_nodes/20200101_20200201_PRC_LMP_DAM_20200603_08_11_05_v1.csv')
-    lmp_feb20 = pd.read_csv('data/caiso_lmp_nodes/20200201_20200301_PRC_LMP_DAM_20200603_08_31_18_v1.csv')
-    lmp_mar20 = pd.read_csv('data/caiso_lmp_nodes/20200301_20200401_PRC_LMP_DAM_20200603_08_32_02_v1.csv')
-    lmp_apr20 = pd.read_csv('data/caiso_lmp_nodes/20200401_20200501_PRC_LMP_DAM_20200603_08_42_03_v1.csv')
-    lmp_may20 = pd.read_csv('data/caiso_lmp_nodes/20200501_20200601_PRC_LMP_DAM_20200603_08_45_10_v1.csv')
+    lmp_feb19 = pd.read_csv('../data/caiso_lmp_nodes/20190201_20190301_PRC_LMP_DAM_20200603_09_30_31_v1.csv')
+    lmp_mar19 = pd.read_csv('../data/caiso_lmp_nodes/20190301_20190401_PRC_LMP_DAM_20200603_09_21_36_v1.csv')
+    lmp_apr19 = pd.read_csv('../data/caiso_lmp_nodes/20190401_20190501_PRC_LMP_DAM_20200602_22_44_57_v1.csv')
+    lmp_may19 = pd.read_csv('../data/caiso_lmp_nodes/20190501_20190601_PRC_LMP_DAM_20200602_22_54_16_v1.csv')
+    lmp_jun19 = pd.read_csv('../data/caiso_lmp_nodes/20190601_20190701_PRC_LMP_DAM_20200602_23_04_24_v1.csv')
+    lmp_jul19 = pd.read_csv('../data/caiso_lmp_nodes/20190701_20190801_PRC_LMP_DAM_20200602_23_20_18_v1.csv')
+    lmp_aug19 = pd.read_csv('../data/caiso_lmp_nodes/20190801_20190901_PRC_LMP_DAM_20200602_23_29_55_v1.csv')
+    lmp_sep19 = pd.read_csv('../data/caiso_lmp_nodes/20190901_20191001_PRC_LMP_DAM_20200602_23_46_12_v1.csv')
+    lmp_oct19 = pd.read_csv('../data/caiso_lmp_nodes/20191001_20191101_PRC_LMP_DAM_20200603_00_13_44_v1.csv')
+    lmp_nov19 = pd.read_csv('../data/caiso_lmp_nodes/20191101_20191201_PRC_LMP_DAM_20200603_00_24_23_v1.csv')
+    lmp_dec19 = pd.read_csv('../data/caiso_lmp_nodes/20191201_20200101_PRC_LMP_DAM_20200603_00_33_09_v1.csv')
+    lmp_jan20 = pd.read_csv('../data/caiso_lmp_nodes/20200101_20200201_PRC_LMP_DAM_20200603_08_11_05_v1.csv')
+    lmp_feb20 = pd.read_csv('../data/caiso_lmp_nodes/20200201_20200301_PRC_LMP_DAM_20200603_08_31_18_v1.csv')
+    lmp_mar20 = pd.read_csv('../data/caiso_lmp_nodes/20200301_20200401_PRC_LMP_DAM_20200603_08_32_02_v1.csv')
+    lmp_apr20 = pd.read_csv('../data/caiso_lmp_nodes/20200401_20200501_PRC_LMP_DAM_20200603_08_42_03_v1.csv')
+    lmp_may20 = pd.read_csv('../data/caiso_lmp_nodes/20200501_20200601_PRC_LMP_DAM_20200603_08_45_10_v1.csv')
 
 
     all_lmp_price = [lmp_feb19, lmp_mar19, lmp_apr19, lmp_may19, lmp_jun19, lmp_jul19, lmp_aug19, lmp_sep19, lmp_oct19, lmp_nov19, lmp_dec19,
@@ -212,7 +212,7 @@ def obtain_format_hh_natgas_to_df():
         Dataframe comprise of daily prices and correpsonding dates.
     """
 
-    natgas = pd.read_csv('data/natgas_jan_19_may_20.csv', names=['date', 'HH_$_million_BTU_not_seasonal_adj'], skiprows=1)
+    natgas = pd.read_csv('../data/natgas_jan_19_may_20.csv', names=['date', 'HH_$_million_BTU_not_seasonal_adj'], skiprows=1)
     natgas['date'] = natgas_19_20['date'].apply(lambda x: datetime.strptime(x, '%Y-%m-%d'))
     natgas['HH_$_million_BTU_not_seasonal_adj'] = np.where((natgas_19_20['HH_$_million_BTU_not_seasonal_adj'] == '.'),
                                                            np.nan, natgas_19_20['HH_$_million_BTU_not_seasonal_adj'])
